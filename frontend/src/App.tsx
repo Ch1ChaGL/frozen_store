@@ -1,36 +1,40 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import { useEffect, useState } from 'react';
+import { retrieveLaunchParams } from '@telegram-apps/sdk';
 
 function App() {
-  const [response, setResponse] = useState<any | null>(null);
+  const [userData, setUserData] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('https://f8bf-128-140-117-243.ngrok-free.app/hello/getHello', {
+    //@ts-ignore
+    const tg = window.Telegram?.WebApp;
+    if (!tg) {
+      setError('Не в Telegram Web App');
+      return;
+    }
+    alert(tg.initData);
+    fetch('https://65cd-128-140-117-243.ngrok-free.app/hello/getUserData', {
+      method: 'GET',
       headers: {
-        'ngrok-skip-browser-warning': 'true', // любое значение
+        'Content-Type': 'application/json', // любое значение
+        'ngrok-skip-browser-warning': 'true',
+        initData: tg.initData, // Передаём Telegram initData
       },
     })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(`Ошибка: ${res.status} ${res.statusText}`);
-        }
-        return res.text();
-      })
-      .then(data => {
-        setResponse(JSON.parse(data));
-      })
-      .catch(err => {
-        setError(err.message);
-        setResponse(null); // Обнуляем response, если есть ошибка
-      });
+      .then(res => res.json())
+      .then(data => setUserData(data))
+      .catch(err => setError(err.message));
   }, []);
 
   return (
     <div className='App'>
-      <h1>Ответ с сервера:</h1>
+      <h1>Данные пользователя:</h1>
       {error && <p style={{ color: 'red' }}>Ошибка: {error}</p>}
-      {response ? <p>{response.message}</p> : !error && <p>Загрузка...</p>}
+      {userData ? (
+        <p>{JSON.stringify(userData, null, 2)}</p>
+      ) : (
+        <p>Загрузка...</p>
+      )}
     </div>
   );
 }
