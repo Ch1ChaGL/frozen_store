@@ -2,6 +2,7 @@ import { BadRequestException } from '@nestjs/common';
 import { Users } from '@prisma/client';
 import * as crypto from 'crypto';
 import * as qs from 'querystring';
+import { parseTgInitData } from './parseTgInitData.utils';
 
 export const validateTgInitData = (initData: string): Users => {
   const botToken = process.env.BOT_TOKEN;
@@ -35,10 +36,9 @@ export const validateTgInitData = (initData: string): Users => {
     throw new BadRequestException('Invalid hash: data may be forged');
   }
 
-  const { id, ...userData } = JSON.parse(params.user as string);
+  const userData = parseTgInitData(params.user as string);
 
   return {
-    telegramUserId: id.toString(),
     ...userData,
   };
 };

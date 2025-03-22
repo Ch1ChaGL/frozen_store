@@ -1,0 +1,101 @@
+.card {
+  display: flex;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 12px;
+  max-width: 420px;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+@media (hover: none) {
+  .card:hover {
+    transform: none; /* Отключаем эффект ховера на мобильных */
+    box-shadow: none; /* Отключаем тень на мобильных */
+  }
+}
+
+.avatarContainer {
+  position: relative;
+  margin-right: 16px;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e0e0e0; /* Легкая рамка вокруг аватарки */
+}
+
+.premiumBadge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #28a745; /* Зеленый оттенок */
+  color: #fff;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.userInfo {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+  line-height: 1.2;
+}
+
+.username {
+  color: #0088cc; /* Телеграмовский синий */
+  font-size: 15px;
+  margin-top: 4px;
+}
+
+.details {
+  font-size: 13px;
+  color: #555;
+  margin-top: 8px;
+}
+
+.telegramId {
+  display: block;
+}
+
+.adminBadge {
+  background-color: #0088cc; /* Телеграмовский синий */
+  color: #fff;
+  border-radius: 6px;
+  padding: 3px 8px;
+  margin-left: 6px;
+}
+
+.language,
+.pmStatus {
+  font-size: 12px;
+  color: #888;
+}
+
+.pmStatus {
+  font-style: italic;
+}
+
+.pmStatus,
+.language {
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
