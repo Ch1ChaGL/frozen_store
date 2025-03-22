@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Users {
-  telegramUserId     Int     @id @map("telegram_user_id")
+  telegramUserId     String  @id @map("telegram_user_id")
   isAdmin            Boolean @default(false)
   first_name         String
   last_name          String
@@ -16,4 +16,5 @@ model Users {
   language_code      String
   allows_write_to_pm Boolean
   photo_url          String
+  is_premium         Boolean @default(false)
 }

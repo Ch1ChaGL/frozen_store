@@ -38,7 +38,7 @@ export const validateTgInitData = (initData: string): Users => {
   const { id, ...userData } = JSON.parse(params.user as string);
 
   return {
-    telegramUserId: id,
+    telegramUserId: id.toString(),
     ...userData,
   };
 };
