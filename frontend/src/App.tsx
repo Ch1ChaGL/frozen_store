@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { retrieveLaunchParams } from '@telegram-apps/sdk';
 
 function App() {
   const [userData, setUserData] = useState<any | null>(null);
@@ -12,13 +11,13 @@ function App() {
       setError('Не в Telegram Web App');
       return;
     }
-    alert(tg.initData);
-    fetch('https://65cd-128-140-117-243.ngrok-free.app/hello/getUserData', {
-      method: 'GET',
+
+    fetch('https://d1d9-2a01-e5c0-5317-00-2.ngrok-free.app/auth/authenticate', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json', // любое значение
         'ngrok-skip-browser-warning': 'true',
-        initData: tg.initData, // Передаём Telegram initData
+        tg_init_data: tg.initData, // Передаём Telegram initData
       },
     })
       .then(res => res.json())
